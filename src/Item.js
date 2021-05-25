@@ -1,10 +1,14 @@
 import React from 'react'
 
+
 class Item extends React.Component {
 
     render(){
         return (
-        <li key={this.props.i}>{this.props.item}</li>
+        <div>
+            <li key={this.props.i}>{this.props.item}</li>
+            {/* <button onClick={(e) => this.props.callBackFn("Harness")}>Send to List</button> */}
+        </div>
         )
     }
 }

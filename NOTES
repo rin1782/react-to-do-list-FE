@@ -1,0 +1,160 @@
+                    STATE
+
+*Unlike props(which is data sent from parent node to child), 
+    -state is data that is controlled by the component itself.
+
+*We store state in an object
+
+*Using state allows us to keep track of data within a component,
+    rather than relying on data sent as props from parent
+
+*State allows us to make our app more dynamic
+
+*Anytime the state is changed, the component will re-render.
+
+                
+                CONSTRUCTOR/SETTING INITIAL STATE
+
+
+*If we don't define a constructor method within our class, it will be inherited
+    from the Component class 
+
+*When we want a component to have a state, we will set the initial state within
+    the CONSTRUCTOR which means we will be OVERRIDING the constructor inherited 
+    from component class.
+
+*We set our initial state as a property within the CONSTRUCTOR
+    EX:     this.state = {list: [["Dog Food", "Harness"]]}
+                ^           ^               ^
+            ^
+            ^
+    this(our component obj)
+    giving it a property of state
+
+
+                            SUPER
+
+*In our constructor we MUST call the SUPER method BEFORE setting initial state
+
+*The SUPER method refers to the CONSTRUCTOR method in the parent class(Component)
+
+*By calling SUPER we are executing the constructor defined in Component,
+    which is absolutely necessary bc that constructor defines imp
+    attributes on our instance - most notably, PROPS
+
+*The value of the THIS keyword will be undefined unless we call SUPER
+
+*We do NOT NEED to define a constructor, but if we WANT to set initial state,
+    this is a good place to do it bc it runs before the RENDER method.
+
+
+                            UPDATING STATE        
+
+*we can NOT update state by just assigning new value, bc doing so will 
+    NOT trigger the component to re-render and we wont see a changed
+        ex) this.state.list = ["new", "array"]      <---NO
+
+** INSTEAD, we must use the setState method that is inherited from Component class
+        ex) this.setState({list: [...this.state.list, "Cereal"]})
+
+*the setState method can take in either an object OR a function to update our state
+        **safer to use the function!!
+
+
+                            WHY setState?
+
+*the setState method ALWAYS triggers a rerender (updating the DOM)
+
+*the setState method is asynchronous (to save from unnecessary rendering)
+    (*aka will try to batch all the setState calls in your app, but the rest of
+    your code will still run while react is getting them all together)
+
+*The setState method merges our new state with the current state which means 
+    we can update a single key-value pair in our state without overriding other pairs
+
+
+    **THE ONLY WAY TO SEND INFO FROM CHILD TO PARENT IS WITH CALLBACK FUNCTIONS**
+            --(ITEM CLASS line 9)--
+
+
+            DIFFERENT WAYS TO CREATE CALLBACK FOR EVENTS
+
+
+<button onClick={this.handleClick.bind(this)}>Click Me:</button>
+    **no need to define another function when binding this 
+        -you are basically pulling the function out of itself and binding this
+<button onClick={(e) => this.handleClick(e, "string")}>Click Me:</button>
+    **this one would need another arg in function 
+        ex) -- handleClick(e, otherArg){} --
+<button onClick={function(e) {this.handleClick(e)}}>Click Me:</button>
+<button onClick={(e) => console.log("clicked!")}>Click Me:</button>
+
+
+
+                        FORMS
+
+
+*a JSX form looks almost identical to HTML form
+
+*still need to set up event handler for submitting
+
+*still need to prevent the default behavior for the form inside 
+    the event handler function
+
+
+                    UNCONTROLLED Component
+
+    *A UNCONTROLLED component is one where we don't control the user input
+        values in our state and instead rely on the DOM
+
+    *the main case for using an UNCONTROLLED component is if you have a very
+        simple form that doesn't require instant input validation OR
+        -if each input has to handle the data differently
+
+    *in order to access the input values in an UNCONTROLLED component we need
+        to use refs (a way to reference an element that is on the DOM)
+
+    *We should almost always write controlled components
+
+                CONSOLE WITH FORM DEBUGGER
+
+        (in constructor, under super())
+this.input = React.createRef() 
+
+<input type="text" ref={this.input}/>
+        //creates a REFERENCE to an element that lives on the DOM
+
+    e
+SyntheticBaseEvent {_reactName: "onSubmit", _targetInst: null, type: "submit", nativeEvent: SubmitEvent, target: form, …}
+e.target
+<form>​<input type=​"text">​<input type=​"submit">​</form>​
+this.input
+{current: input}
+this.input.current.value
+"harness"
+
+                CONTROLLED components
+
+    *a controlled component is one where we control the value of any user
+        input within our state
+    
+    *in react, we set the value of our inputs to a corresponding value
+        in our state and use an onChange event
+
+    *when a user enters something, we update our state with that value
+        which then triggers a re-render to update the DOM
+
+
+                DYNAMICALLY UPDATING STATE
+
+    *If we have a big form with a lot of inputs we don't want to have to 
+        write out an event handler for each input
+
+    *INSTEAD, we can define a single event handler and use the SyntheticEvent
+        object to help us update the state
+
+    *If we provide each of our inputs with a name property, we can then access 
+        that value through the SyntheticEvent object in our event handler
+            EX) -- {[e.target.name]: e.target.value} 
+
+    *brackets create the key 
