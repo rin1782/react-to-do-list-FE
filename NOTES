@@ -329,6 +329,55 @@ this.input.current.value
 *The difference between these is that the PureComponent class does A
     shallow comparison within the inherited shouldComponentUpdate
     lifecycle method
+
+
+
+
+                        CLIENT SIDE ROUTING
+
+
+
+                        Server Side ROUTING
+
+    *in rails apps we're using server-side ROUTING
+    *when we click link, submit form, the url is changed which sends an 
+        HTTP request - rails then sends back a responds
+    *when that response is received, the whole page is cleared out and 
+        all new content is rendered even if we wanted it to stay there
+
+                        CLIENT SIDE ROUTING
+
+    *in react, we can utilize CLIENT-SIDE routing which does NOT send an HTTP request
+    *instead, it changes the URL while we can handle making any requests
+        without a page refresh
+    *Client side routing enables us to only update the part(s) of the content
+        that we choose rather than updating everything
+    *Remember: we are still working with SPA!!
+
+
+
+                        REACT ROUTER
+
+    *React Router is an ADDITIONAL library (not part of react library)
+        that enables us to render components based on the URL
+    *React Router provides us with react components that we can wrap around
+        our own components so that they are only displayed when a user navigates
+        to a specific path
+    *React Router relies on the window's history object to determine
+        info about the past, current, and present paths
+
+
+                THE BrowserRouter COMPONENTS
+
+*in order to access to the history object we must wrap every component
+    in which we want to set up routes inside of the BrowserRouter component
+*instances of the BrowserRouter define a property called history that is
+    sent to the Router as a property
+*we often wrap either our App component or the components returned
+    from App in BrowserRouter
+
+
+
                 
 
 

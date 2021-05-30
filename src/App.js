@@ -1,11 +1,11 @@
 // import React from 'react'
 // this is a container component --see notes
-import Lists from './Lists'
+import ListsContainer from './Lists/ListsContainer'
 
 
 function App(){
   return(
-    <Lists/>
+    <ListsContainer />
   )
 }
 

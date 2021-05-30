@@ -1,8 +1,8 @@
-import React from 'react'
-import List from './List'
+import React, {Component} from 'react'
+import Lists from './Lists'
 import ListForm from './ListForm'
 
-class Lists extends React.Component {
+export default class ListsContainer extends Component {
 
     constructor() {
         super()
@@ -29,17 +29,14 @@ class Lists extends React.Component {
         })
     }
 
-    render(){
-        return (
-            <div>
-                <ListForm sendData={this.updateState}/>
-                <ul>
-                    {this.state.lists.map((list, i) => <List key={i} list={list}/>)}
-                </ul>
-            </div>
+    render() {
+        return(
+        <div>
+            <ListForm sendData={this.updateState} />
+            <Lists lists={this.state.lists} />
+        </div>
         )
     }
 
-}
 
-export default Lists
+}
