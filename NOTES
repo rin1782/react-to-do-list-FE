@@ -317,6 +317,18 @@ this.input.current.value
         :THESE ARE CHILD COMPONENTS
         :usually, but not always, functional components
 
+                        PURE COMPONENTS
+
+*when we talk about PURE components or functions, we are referring to 
+    the idea that if we give a component or function the same values over
+    and over we can expect the same outcome everytime
+*we have been extending the Component class for all of our components
+    so that they inherit functionality
+*React also provides a PureComponent class that we can extend as an 
+    alternative to Component
+*The difference between these is that the PureComponent class does A
+    shallow comparison within the inherited shouldComponentUpdate
+    lifecycle method
                 
 
 

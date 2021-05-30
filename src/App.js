@@ -1,4 +1,5 @@
 // import React from 'react'
+// this is a container component --see notes
 import Lists from './Lists'
 
 
