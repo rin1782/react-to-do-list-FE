@@ -1,24 +1,33 @@
-import React from 'react'
-import List from './List'
+// import React from 'react'
+import Lists from './Lists'
 
 
-class App extends React.Component {
-  
-    // handleClick(e) {
-      
-    //   console.log("clicked")
-    // }
-
-    render(){
-  
-      return (
-        <div>
-            <h1 className="greeting">Pet Store List</h1>
-            {/* <button onClick={this.handleClick.bind(this)}>Click Me:</button> */}
-            <List />
-        </div>
-      )
-    }
+function App(){
+  return(
+    <Lists/>
+  )
 }
+
+// class App extends React.Component {
+  
+//     // constructor(){
+//     //   super()
+//     //   this.state = {showLists: true}
+//     // }
+
+//     // toggleLists(){
+//     //   this.setState(prevState => ({showLists: !prevState.showLists}))
+//     // }
+//     render(){
+      
+//       return (
+//         // <div>
+//         //     <button onClick={(e) => this.toggleLists()}>Toggle Lists</button>
+//         //   {this.state.showLists ? <Lists /> : null}
+//         // </div>
+//         <Lists />
+//       )
+//     }
+// }
 
 export default App;

@@ -158,3 +158,167 @@ this.input.current.value
             EX) -- {[e.target.name]: e.target.value} 
 
     *brackets create the key 
+
+                LIFECYCLE METHODS aka PHASES
+
+*the PRE-MOUNTING phase is the BIRTH of our component and occurs BEFORE
+    the component is mounted to the DOM 
+            **HAPPENS IN ______ METHOD:
+        * -->> constructor (when its being instantiated)
+
+*the MOUNTING phase occurs when our component is initially being rendered
+    to the DOM
+        * --> render
+        * --> componentDidMount (aka 'has this component been mounted?')
+
+*the UPDATING phase occurs when any change is made to props or state
+        * --> render
+        * --> componentDidUpdate
+
+*the UNMOUNTING phase occurs when the component is being removed from the DOM
+        * --> componentWillUnmount
+
+                LIFECYCLE METHODS in DETAIL:
+
+                        *CONSTRUCTOR*
+    
+    :first lifecycle method to execute and should be used to set up
+        local state and can be used to BIND METHODS
+    :we MUST call SUPER within our constructor - the constructor we invoke
+        we inherit from Component and to set the value of THIS within constructor
+    :if we're not setting state or binding methods, we DO NOT NEED constructor
+    :constructor method runs ONCE in a component's life cycle
+
+                        *RENDER*
+
+    :the RENDER method is the ONLY REQUIRED lifecycle method
+    :we MUST RETURN one of the following from render_
+        -React elements - either JSX or another component
+        -arrays and fragments
+        -portals - allow you to render a child onto an element outside
+            of the parent's node tree
+        -string and numbers - rendered as text nodes on the DOM
+        -booleans or null - render nothing
+    :the render method should be pure - this means it does NOT modify
+        a component's State - *otherwise will create infinite loop*
+            BECAUSE setState triggers another re-render
+    :the render method runs whenever there is a change to props or state
+
+                    *componentDidMount* 
+
+    :the ComponentDidMount method is invoked right after the component
+        is rendered to the DOM
+    :the ComponentDidMount method is a good place to make calls to an API
+        since the initial content will already be rendered on the DOM
+            *- we also use componentDidMount to set up subscriptions
+                (something you're doing over and over)
+    :if there is a change of the state, the render method will be invoked again
+    :this method runs ONLY ONCE after the initial render in lifecycle
+
+                *componentDidUpdate*
+
+    :the componentDidUpdate is invoked after any update occurs but is 
+        NOT invoked after the initial render
+    :this method can accept 3 arguments -
+        1) previous props
+        2) previous state
+        3) snapshot
+            *the snapshot value will be whatever is returned from getSnapshotBeforeUpdate
+    :we can call setState within componentDidUpdate but it MUST be wrapped in a condition
+    :runs whenever there is a change to props or state
+
+                *componentWillUnmount*
+
+    :the componentWillUnmount method is invoked just before a component
+        is unmounted and destroyed
+    :we use this method as a cleanup method to remove any subscriptions
+        that were set up in componentDidMount
+    :we should not call setState in componentWillUnmount because the 
+        component is about to be destroyed
+    :this is only called ONCE when its unmounted
+
+
+*Best Practice is to set your components state as a skeleton of your API or what youre rendering
+    
+
+                    REACT AND asynchronous JS
+
+*react allows us to use the fetch API and other AJAX libs to get data from API
+*we make our AJAX calls to get initial data within the componentDidMount
+*we also make AJAX calls in event handler functions to send data to 
+    an API to be saved in the db and then update our state w/ data we receive
+
+
+
+
+                    REACT COMPONENTS 
+
+
+*so far weve set up all our components as classes
+*Class components can:
+    *have state
+    *receive props
+    *include lifecycle methods
+*class components MUST have render method
+*we can choose to always use class components but not always necessary
+
+
+                    FUNCTIONAL COMPONENTS
+
+*we can also define components as regular javascript functions
+*since functional components are just plain old functions, we do not have
+    access to many of the features we get with classes
+*Functional components:
+    1) can receive props
+    2) cannot set state*
+    3) do not have lifecycle methods*
+*Functional components must return JSX or any of the other valid types
+    (ie strings, booleans, etc)
+        **we now have hooks which enable us to keep track of state in
+        functional components as well as set up what resembles lifecycle methods**
+
+
+        CLASS vs FUNCTIONAL COMPONENTS
+
+*PRIOR TO HOOKS:
+    --wed make a decision about whether to use a class or functional component
+        based on whether it needs to store state and/or utilize lifecycle methods
+    --when we had a CLASS component, React creates a new instance of a class
+        and calls the render method on that instance - anytime the component
+        needs to re-render, we are still dealing with the SAME object
+    --when we have a FUNCTIONAL component, React is simply invoking that
+        function which returns a JSX object - anytime the component needs to
+        re-render that function must be invoked AGAIN
+
+
+                    *PRESENTATIONAL vs CONTAINER components*
+        *there are only 2 ways to define components - classes or functions
+        *the terms PRESENTATIONAL and CONTAINER just refer to a way that we can 
+            organize/structure our components
+        *PRESENTATIONAL components are those that simply receive info and display it
+        *CONTAINER components are those that request data and keep track of that 
+            data in state
+
+                        CONTAINER COMPONENTS
+
+        :concerned with how things work NOT how they look
+        :have state
+        :send data to other components
+        :do not actually display any data themselves
+        :THESE ARE PARENT COMPONENTS
+        :usually but not always these are CLASS components
+
+                        PRESENTATIONAL COMPONENTS
+
+        :concerned with how things look not work
+        :usually dont have state
+        :receive data exclusively through props
+        :present the data received through props
+        :THESE ARE CHILD COMPONENTS
+        :usually, but not always, functional components
+
+                
+
+
+
+
