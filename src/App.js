@@ -1,11 +1,15 @@
 // import React from 'react'
 // this is a container component --see notes
 import ListsContainer from './Lists/ListsContainer'
+import NavBar from './NavBar'
 
 
 function App(){
   return(
-    <ListsContainer />
+    <>
+      <NavBar/>
+       <ListsContainer />
+    </>
   )
 }
 

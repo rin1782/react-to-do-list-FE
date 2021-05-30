@@ -330,6 +330,18 @@ this.input.current.value
     shallow comparison within the inherited shouldComponentUpdate
     lifecycle method
 
+                        FRAGMENTS 
+
+*As we know, we can only return a single JSX element from our components
+    which means we often are including unwanted div tags just to wrap
+    child components
+*React provides us with another class called Fragment that we can use instead
+    of a div that will not generate unnecessary HTML
+*We just need to wrap our elements inside of Fragment tags
+*Fragments can take in a key property that we should use when iterating
+    --*we cannot use the key prop if we use the shorthand syntax
+                    
+
 
 
 
@@ -367,7 +379,7 @@ this.input.current.value
         info about the past, current, and present paths
 
 
-                THE BrowserRouter COMPONENTS
+                    THE BrowserRouter COMPONENT
 
 *in order to access to the history object we must wrap every component
     in which we want to set up routes inside of the BrowserRouter component
@@ -375,6 +387,42 @@ this.input.current.value
     sent to the Router as a property
 *we often wrap either our App component or the components returned
     from App in BrowserRouter
+
+                    The Route Component
+
+*we can only use the Route component from inside components that are wrapped
+    in BrowserRouter
+*the Route component provides the configurations that renders a certain 
+    component based on the path in the browser 
+*the route component accepts a property called path 
+*we can optionally pass properties called render and component
+
+
+                        USING ROUTE
+        *there are 3 ways we can set up ROUTE component*
+
+1) we can wrap the child component inside: (the most common)
+        <Route path="/lists" />
+            <Lists lists={this.state.lists}/>
+        </Route> 
+
+2) we can use the component property: (used the least, cant pass props, dont use this)
+        <Route path="/lists" component={Lists}/>
+
+3) we can use the render property:
+    <Route path="/lists" render={(routerProps) => <Lists {...routerProps} lists={this.state.lists}/>} />
+
+
+        SWITCH COMPONENT AND EXACT
+
+*we can wrap our route components inside switch components
+*without a switch component, react will render all routes that match current path
+*with a switch component, react will only render the first route that matches
+*we can also use the exact property to specify that we only want 
+    to show that component if the path matches exactly 
+
+
+
 
 
 

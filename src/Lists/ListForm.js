@@ -1,13 +1,11 @@
 import React from 'react'
-
+import {withRouter} from 'react-router-dom'
 
 class ListForm extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {name: ""}
-        this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleChange = this.handleChange.bind(this)
     }
 
     handleSubmit(e) {
@@ -21,23 +19,20 @@ class ListForm extends React.Component {
         }).then(r => r.json())
         .then(list => this.props.sendData(list))
         this.setState({name: ""})
+        this.props.history.push("/lists")
     }
 
-    handleChange(e){
-        this.setState({[e.target.name]: e.target.value})
-    }
+    handleChange = (e) => {this.setState({[e.target.name]: e.target.value})}
 
-    render() {
+    render = () => {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit.bind(this)}>
                 <input type="text" onChange={this.handleChange} value={this.state.name} name="name"/>
 
                 <input type="submit"/>
-                </form>
-            )
-        }
-
-
+            </form>
+        )
     }
+}
 
-export default ListForm
+export default withRouter(ListForm)

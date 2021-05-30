@@ -1,16 +1,21 @@
-import React from 'react'
+import React, {Component, Fragment} from 'react'
+import ListForm from './ListForm'
 import List from './List'
+import {Redirect, Link} from 'react-router-dom'
 
 
-export default class Lists extends React.Component {
+class Lists extends Component {
 
     render(){
         return (
             <>
+                
                 <ul>
-                    {this.state.lists.map((list, i) => <List key={i} list={list}/>)}
+                    {this.props.lists.map((list, i) => <li><Link to={`/lists/${list.id}`} >{list.name}</Link></li> )}
                 </ul>
             </>
         )
     }
 }
+
+export default Lists
